@@ -1,23 +1,40 @@
 body{
     height: 480px;
-    width: 472px;
+    width: 475px;
     background-color: black;
+    margin: 100px auto;
 }
 .main{
     background-color: rgb(255, 255, 255);
-
+    border-radius: 5px;
+    .blur{
+        color: rgba(0, 0, 0,0.2);
+    }
+    .numbers{
+        font-weight: bold;
+    }
+    .color{
+        background-color: white;
+    }
     .inp{
-        background-color: aqua;
-        padding: 35px;
+        .input-text{
+            text-align: right;
+        }
+        input{
+            height: auto;
+            font-size: 70px;
+            width: 467px;
+            border: none;
+            margin-left: 2px;
+        }
     }
     .first{
         display: flex;
-        background-color:rgb(255, 0, 0);
         .DEG{
-            margin: 10px 10px;
+            margin: 15px 20px;
         }
         .F-E{
-            margin: 10px 15px;
+            margin: 15px 15px;
         }
     }
 
@@ -31,16 +48,20 @@ body{
         .Function{
             padding-top: -5px;
             padding: 10px;
+            img{
+                padding-top: 10px;
+            }
         }
     }
     table{
         tr{
             td{
                 button{
-                    border: none;
+                    // border: none;
                     font-size: 1em;
                     height: 50px;
                     width: 90px;
+                    // font-weight: bold;
                 }
             }
         }

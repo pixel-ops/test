@@ -1,25 +1,41 @@
 body {
   height: 480px;
-  width: 472px;
+  width: 475px;
   background-color: black;
+  margin: 100px auto;
 }
 
 .main {
   background-color: rgb(255, 255, 255);
+  border-radius: 5px;
 }
-.main .inp {
-  background-color: aqua;
-  padding: 35px;
+.main .blur {
+  color: rgba(0, 0, 0, 0.2);
+}
+.main .numbers {
+  font-weight: bold;
+}
+.main .color {
+  background-color: white;
+}
+.main .inp .input-text {
+  text-align: right;
+}
+.main .inp input {
+  height: auto;
+  font-size: 70px;
+  width: 467px;
+  border: none;
+  margin-left: 2px;
 }
 .main .first {
   display: flex;
-  background-color: rgb(255, 0, 0);
 }
 .main .first .DEG {
-  margin: 10px 10px;
+  margin: 15px 20px;
 }
 .main .first .F-E {
-  margin: 10px 15px;
+  margin: 15px 15px;
 }
 .main .third {
   display: flex;
@@ -32,8 +48,10 @@ body {
   padding-top: -5px;
   padding: 10px;
 }
+.main .third .Function img {
+  padding-top: 10px;
+}
 .main table tr td button {
-  border: none;
   font-size: 1em;
   height: 50px;
   width: 90px;

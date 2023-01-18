@@ -7,29 +7,29 @@
     <link rel="stylesheet" href="style.css">
     <title>Javascript Practical</title>
 </head>
-<body>
+<body onclick="myfunction(event)">
     
     <div class="main">
         
         <div class="inp">
-
+            <input dir="" class="input-text" type="text" name="" id="inp">
         </div>
         <div class="first">
-            <div class="DEG">
+            <div class="DEG numbers">
                 DEG
             </div>
-            <div class="F-E">
+            <div class="F-E numbers">
                 F-E
             </div>
         </div>
 
         <table>
             <tr>
-                <td><button>MC</button></td>
-                <td><button>MR</button></td>
-                <td><button>M+</button></td>
-                <td><button>M-</button></td>
-                <td><button>MS</button></td>
+                <td><button class="blur color">MC</button></td>
+                <td><button class="blur color">MR</button></td>
+                <td><button class="numbers color">M+</button></td>
+                <td><button class="numbers color">M-</button></td>
+                <td><button class="numbers color">MS</button></td>
             </tr>
         </table>
 
@@ -38,16 +38,16 @@
                 <img src="img/trignometry.png" alt=""> Trignometry <img src="img/down_arrow.png" alt="" height="10px" width="10px">
             </div>
             <div class="Function">
-                Function
+                <img src="img/function.png" alt="" height="25px" width="15px" > Function <img src="img/down_arrow.png" alt="" height="10px" width="10px">
             </div>
         </div>
 
         <table>
             <tr>
                 <td><button>2<sup>nd</sup></button></td>
-                <td><button>pi</button></td>
-                <td><button>e</button></td>
-                <td><button>C</button></td>
+                <td><button value="3.14">pi</button></td>
+                <td><button value="2.71">e</button></td>
+                <td><button >C</button></td>
                 <td><button>clr</button></td>
             </tr>
 
@@ -56,42 +56,42 @@
                 <td><button>1/x</button></td>
                 <td><button>|x|</button></td>
                 <td><button>exp</button></td>
-                <td><button>mod</button></td>
+                <td><button value="%">mod</button></td>
             </tr>
             <tr>
-                <td><button>2x</button></td>
-                <td><button>(</button></td>
-                <td><button>)</button></td>
-                <td><button>n!</button></td>
-                <td><button>/</button></td>
+                <td><button value="">2x</button></td>
+                <td><button value="(">(</button></td>
+                <td><button value=")">)</button></td>
+                <td><button value="!">n!</button></td>
+                <td><button value="/">/</button></td>
             </tr>
             <tr>
                 <td><button>x<sup>y</sup></button></td>
-                <td><button>7</button></td>
-                <td><button>8</button></td>
-                <td><button>9</button></td>
-                <td><button>*</button></td>
+                <td><button class="numbers" value="7">7</button></td>
+                <td><button class="numbers" value="8">8</button></td>
+                <td><button class="numbers" value="9">9</button></td>
+                <td><button value="*">*</button></td>
             </tr>
             <tr>
                 <td><button>10<sup>x</sup></button></td>
-                <td><button>4</button></td>
-                <td><button>5</button></td>
-                <td><button>6</button></td>
-                <td><button>-</button></td>
+                <td><button class="numbers" value="4">4</button></td>
+                <td><button class="numbers" value="5">5</button></td>
+                <td><button class="numbers" value="6">6</button></td>
+                <td><button value="-">-</button></td>
             </tr>
             <tr>
                 <td><button>log</button></td>
-                <td><button>1</button></td>
-                <td><button>2</button></td>
-                <td><button>3</button></td>
-                <td><button>+</button></td>
+                <td><button class="numbers" value="1">1</button></td>
+                <td><button class="numbers" value="2">2</button></td>
+                <td><button class="numbers" value="3" >3</button></td>
+                <td><button value="+">+</button></td>
             </tr>
             <tr>
                 <td><button>ln</button></td>
                 <td><button>+/-</button></td>
-                <td><button>0</button></td>
+                <td><button value="0">0</button></td>
                 <td><button>.</button></td>
-                <td><button>=</button></td>
+                <td><button style="background-color: rgba(0, 162, 255, 0.5);" onclick="evaluatess()">=</button></td>
 
             </tr>
         </table>
