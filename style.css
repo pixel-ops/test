@@ -1,0 +1,40 @@
+body {
+  height: 480px;
+  width: 472px;
+  background-color: black;
+}
+
+.main {
+  background-color: rgb(255, 255, 255);
+}
+.main .inp {
+  background-color: aqua;
+  padding: 35px;
+}
+.main .first {
+  display: flex;
+  background-color: rgb(255, 0, 0);
+}
+.main .first .DEG {
+  margin: 10px 10px;
+}
+.main .first .F-E {
+  margin: 10px 15px;
+}
+.main .third {
+  display: flex;
+  align-items: center;
+}
+.main .third .Trignometry {
+  padding: 10px;
+}
+.main .third .Function {
+  padding-top: -5px;
+  padding: 10px;
+}
+.main table tr td button {
+  border: none;
+  font-size: 1em;
+  height: 50px;
+  width: 90px;
+}/*# sourceMappingURL=style.css.map */
