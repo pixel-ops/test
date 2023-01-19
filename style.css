@@ -1,13 +1,16 @@
 body {
   height: 480px;
-  width: 475px;
+  width: 565px;
   background-color: black;
   margin: 100px auto;
 }
 
 .main {
-  background-color: rgb(255, 255, 255);
+  font-family: "Inconsolata", monospace;
+  background-color: rgb(15, 189, 241);
   border-radius: 5px;
+  padding: 10px;
+  margin-right: -18px;
 }
 .main .blur {
   color: rgba(0, 0, 0, 0.2);
@@ -22,10 +25,11 @@ body {
   text-align: right;
 }
 .main .inp input {
+  font-family: "Inconsolata", monospace;
+  border-radius: 5px;
   height: auto;
   font-size: 70px;
-  width: 467px;
-  border: none;
+  width: 550px;
   margin-left: 2px;
 }
 .main .first {
@@ -52,7 +56,12 @@ body {
   padding-top: 10px;
 }
 .main table tr td button {
+  border-radius: 5px;
   font-size: 1em;
   height: 50px;
   width: 90px;
+  font-size: 1.3em;
+}
+.main table tr td button:hover {
+  background-color: rgb(255, 252, 53);
 }/*# sourceMappingURL=style.css.map */

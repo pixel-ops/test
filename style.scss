@@ -1,12 +1,17 @@
 body{
     height: 480px;
-    width: 475px;
+    width: 565px;
     background-color: black;
     margin: 100px auto;
+
 }
 .main{
-    background-color: rgb(255, 255, 255);
+    font-family: 'Inconsolata', monospace;
+    // font-family: 'Kanit', sans-serif;
+    background-color: rgb(15, 189, 241);
     border-radius: 5px;
+    padding: 10px;
+    margin-right: -18px;
     .blur{
         color: rgba(0, 0, 0,0.2);
     }
@@ -21,10 +26,12 @@ body{
             text-align: right;
         }
         input{
+            font-family: 'Inconsolata', monospace;
+            border-radius: 5px;
             height: auto;
             font-size: 70px;
-            width: 467px;
-            border: none;
+            width: 550px;
+            // border: none;
             margin-left: 2px;
         }
     }
@@ -57,11 +64,16 @@ body{
         tr{
             td{
                 button{
+                    border-radius: 5px;
                     // border: none;
                     font-size: 1em;
                     height: 50px;
                     width: 90px;
-                    // font-weight: bold;
+
+                    font-size: 1.3em;
+                }
+                button:hover{
+                    background-color: rgb(255, 252, 53);
                 }
             }
         }

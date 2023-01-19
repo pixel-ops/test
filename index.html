@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800&family=Kanit:wght@300;400&display=swap" rel="stylesheet">
     <title>Javascript Practical</title>
 </head>
-<body onclick="myfunction(event)">
+<body>
     
     <div class="main">
         
         <div class="inp">
-            <input dir="" class="input-text" type="text" name="" id="inp">
+            <input class="input-text" type="text" name="" id="inp" readonly>
         </div>
         <div class="first">
             <div class="DEG numbers">
@@ -25,72 +29,72 @@
 
         <table>
             <tr>
-                <td><button class="blur color">MC</button></td>
-                <td><button class="blur color">MR</button></td>
-                <td><button class="numbers color">M+</button></td>
-                <td><button class="numbers color">M-</button></td>
-                <td><button class="numbers color">MS</button></td>
+                <td><button class="blur color" onclick="clear_mem()">MC</button></td>
+                <td><button class="blur color" onclick="recall_mem()">MR</button></td>
+                <td><button class="numbers color" onclick="add_mem()">M+</button></td>
+                <td><button class="numbers color" onclick="add_sub()">M-</button></td>
+                <td><button class="numbers color" onclick="store_mem()">MS</button></td>
             </tr>
         </table>
 
-        <div class="third">
-            <div class="Trignometry">
-                <img src="img/trignometry.png" alt=""> Trignometry <img src="img/down_arrow.png" alt="" height="10px" width="10px">
-            </div>
-            <div class="Function">
-                <img src="img/function.png" alt="" height="25px" width="15px" > Function <img src="img/down_arrow.png" alt="" height="10px" width="10px">
-            </div>
-        </div>
+        
 
-        <table>
+        <table style="margin-top: 50px;">
             <tr>
+                <td><button onclick="sin()">sin</button></td>
                 <td><button>2<sup>nd</sup></button></td>
-                <td><button value="3.14">pi</button></td>
-                <td><button value="2.71">e</button></td>
-                <td><button >C</button></td>
-                <td><button>clr</button></td>
+                <td><button value="*3.14" onclick="myfunction(event)">pi</button></td>
+                <td><button value="*2.71" onclick="myfunction(event)">e</button></td>
+                <td><button onclick="clear_me()">C</button></td>
+                <td><button onclick="delete_last()"><i class="fa-solid fa-delete-left"></i></button></td>
             </tr>
 
             <tr>
-                <td><button>x<sup>2</sup></button></td>
-                <td><button>1/x</button></td>
-                <td><button>|x|</button></td>
-                <td><button>exp</button></td>
-                <td><button value="%">mod</button></td>
+                <td><button onclick="cos()">cos</button></td>
+                <td><button onclick="sqr()">x<sup>2</sup></button></td>
+                <td><button onclick="reciprocal()">1/x</button></td>
+                <td><button onclick="myabs()">|x|</button></td>
+                <td><button onclick="exponent()">exp</button></td>
+                <td><button value="%" onclick="myfunction(event)">mod</button></td>
             </tr>
             <tr>
-                <td><button value="">2x</button></td>
-                <td><button value="(">(</button></td>
-                <td><button value=")">)</button></td>
-                <td><button value="!">n!</button></td>
-                <td><button value="/">/</button></td>
+                <td><button onclick="tan()">tan</button></td>
+                <td><button value="" onclick= "squarert()"><span>&#8730;x</span></button></td>
+                <td><button value="(" onclick="myfunction(event)">(</button></td>
+                <td><button value=")" onclick="myfunction(event)">)</button></td>
+                <td><button value="!" onclick="fact()">n!</button></td>
+                <td><button value="/" onclick="myfunction(event)">/</button></td>
             </tr>
             <tr>
-                <td><button>x<sup>y</sup></button></td>
-                <td><button class="numbers" value="7">7</button></td>
-                <td><button class="numbers" value="8">8</button></td>
-                <td><button class="numbers" value="9">9</button></td>
-                <td><button value="*">*</button></td>
+                <td><button onclick="sec()">sec</button></td>
+                <td><button value="**" onclick="myfunction(event)">x<sup>y</sup></button></td>
+                <td><button class="numbers" value="7" onclick="myfunction(event)">7</button></td>
+                <td><button class="numbers" value="8" onclick="myfunction(event)">8</button></td>
+                <td><button class="numbers" value="9" onclick="myfunction(event)">9</button></td>
+                <td><button value="*" onclick="myfunction(event)">*</button></td>
             </tr>
             <tr>
-                <td><button>10<sup>x</sup></button></td>
-                <td><button class="numbers" value="4">4</button></td>
-                <td><button class="numbers" value="5">5</button></td>
-                <td><button class="numbers" value="6">6</button></td>
-                <td><button value="-">-</button></td>
+                <td><button onclick="cosec()">cosec</button></td>
+                <td><button onclick="ten_raise_to_x()">10<sup>x</sup></button></td>
+                <td><button class="numbers" value="4" onclick="myfunction(event)">4</button></td>
+                <td><button class="numbers" value="5" onclick="myfunction(event)">5</button></td>
+                <td><button class="numbers" value="6" onclick="myfunction(event)">6</button></td>
+                <td><button value="-" onclick="myfunction(event)">-</button></td>
             </tr>
             <tr>
-                <td><button>log</button></td>
-                <td><button class="numbers" value="1">1</button></td>
-                <td><button class="numbers" value="2">2</button></td>
-                <td><button class="numbers" value="3" >3</button></td>
-                <td><button value="+">+</button></td>
+                <td><button onclick="cot()">cot</button></td>
+                <td><button onclick="logarithm()">log</button></td>
+                <td><button class="numbers" value="1" onclick="myfunction(event)">1</button></td>
+                <td><button class="numbers" value="2" onclick="myfunction(event)">2</button></td>
+                <td><button class="numbers" value="3" onclick="myfunction(event)" >3</button></td>
+                <td><button value="+" onclick="myfunction(event)">+</button></td>
             </tr>
             <tr>
-                <td><button>ln</button></td>
+                <td><button onclick="natural_log()">ln</button></td>
                 <td><button>+/-</button></td>
-                <td><button value="0">0</button></td>
-                <td><button>.</button></td>
+                <td><button value="00" onclick="myfunction(event)">00</button></td>
+                <td><button value="0" onclick="myfunction(event)">0</button></td>
+                <td><button value="." onclick="myfunction(event)">.</button></td>
                 <td><button style="background-color: rgba(0, 162, 255, 0.5);" onclick="evaluatess()">=</button></td>
 
             </tr>
