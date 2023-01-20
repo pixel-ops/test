@@ -16,14 +16,14 @@
     <div class="main">
         
         <div class="inp">
-            <input class="input-text" type="text" name="" id="inp" readonly>
+            <input class="input-text" value="0" type="text" name="" id="inp" readonly>
         </div>
         <div class="first">
             <div class="DEG numbers">
-                DEG
+                <button  value="" onclick=" DEG()">DEG</button>
             </div>
             <div class="F-E numbers">
-                F-E
+                <button  value="" onclick=" F_E()">F-E</button>
             </div>
         </div>
 
@@ -43,8 +43,8 @@
             <tr>
                 <td><button onclick="sin()">sin</button></td>
                 <td><button>2<sup>nd</sup></button></td>
-                <td><button value="*3.14" onclick="myfunction(event)">pi</button></td>
-                <td><button value="*2.71" onclick="myfunction(event)">e</button></td>
+                <td><button name="PI" id="PI" value="" onclick="pi_check(event)">pi</button></td>
+                <td><button name="e" id="e" value="" onclick="e_check(event)">e</button></td>
                 <td><button onclick="clear_me()">C</button></td>
                 <td><button onclick="delete_last()"><i class="fa-solid fa-delete-left"></i></button></td>
             </tr>

@@ -36,10 +36,28 @@ body {
   display: flex;
 }
 .main .first .DEG {
-  margin: 15px 20px;
+  margin: 15px 2px;
+}
+.main .first .DEG button {
+  border-radius: 5px;
+  border: none;
+  font-size: 1em;
+  height: 5px;
+  width: 90px;
+  background-color: rgb(15, 189, 241);
+  font-size: 1.3em;
 }
 .main .first .F-E {
-  margin: 15px 15px;
+  margin: 15px 0px;
+}
+.main .first .F-E button {
+  border-radius: 5px;
+  border: none;
+  font-size: 1em;
+  height: 5px;
+  width: 90px;
+  background-color: rgb(15, 189, 241);
+  font-size: 1.3em;
 }
 .main .third {
   display: flex;
