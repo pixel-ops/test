@@ -1,19 +1,20 @@
 body{
     height: 480px;
     width: 565px;
-    background-color: black;
+    background-color: rgb(255, 255, 255);
     margin: 100px auto;
 
 }
 .main{
     font-family: 'Inconsolata', monospace;
     // font-family: 'Kanit', sans-serif;
-    background-color: rgb(15, 189, 241);
+    background-color: rgba(196, 196, 196,0.5);
     border-radius: 5px;
-    padding: 10px;
-    margin-right: -18px;
+    // padding: 10px;
+    // margin-right: -18px;
+    box-shadow: 0 10px 20px rgb(0 0 0 / 0.4);
     .blur{
-        color: rgba(0, 0, 0,0.2);
+        color: rgba(0, 0, 0,0.1);
     }
     .numbers{
         font-weight: bold;
@@ -27,25 +28,26 @@ body{
         }
         input{
             font-family: 'Inconsolata', monospace;
-            border-radius: 5px;
-            height: auto;
+            border-radius: 5px 5px 0px 0px;
+            height: 100px;
             font-size: 70px;
-            width: 550px;
-            // border: none;
-            margin-left: 2px;
+            width: 560px;
+            border: none;
+            // margin-left: 2px;
         }
     }
     .first{
         display: flex;
         .DEG{
             margin: 15px 2px;
+            background: none;
             button{
                 border-radius: 5px;
                 border: none;
                 font-size: 1em;
                 height: 5px;
                 width: 90px;
-                background-color: rgb(15, 189, 241);
+                background: rgba(255, 255, 255, 0);
 
                 font-size: 1.3em;
             }
@@ -58,7 +60,7 @@ body{
                 font-size: 1em;
                 height: 5px;
                 width: 90px;
-                background-color: rgb(15, 189, 241);
+                background-color: rgba(255, 255, 255, 0);
                 font-size: 1.3em;
             }
         }
@@ -79,20 +81,20 @@ body{
             }
         }
     }
+    .colour{
+        background-color: rgb(255, 255, 255);
+    }
     table{
         tr{
             td{
                 button{
-                    border-radius: 5px;
-                    // border: none;
+                    // border-radius: 5px;
+                    border: none;
                     font-size: 1em;
                     height: 50px;
                     width: 90px;
-
+                    background-color: rgb(223, 223, 223);;
                     font-size: 1.3em;
-                }
-                button:hover{
-                    background-color: rgb(255, 252, 53);
                 }
             }
         }

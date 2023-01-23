@@ -1,43 +1,25 @@
-let ans = document.getElementById('inp').value;  
 var value = "";
 var mem = 0;
-
-// let reg = /^\s*([-+]?)(\d+)(?:\s*([-+*\/])\s*((?:\s[-+])?\d+)\s*)+$/;
-// from other website let reg = /^(?!\.)(?!.*\.$)(?!.*\.\.)[a-zA-Z0-9_.]+$/;
-// let reg = /^[\d()+\-*/\s]*(\*\*[\d()+\-*/\s]*)*$/;
-// let reg = /^(?:\d+\.\d*|\.\d+|\d+|[+\-*/^()]|\*\*)+$/;
-// let reg = /^(-?\d+.?\d*)([/+-**])(-?\d+.?\d*)$/;
-// let reg =/^\d+((\.\d+)?[\+\-×÷]\d+(\.\d+)?)+$/
-let reg = /^[\d\+\-\*\/\(\)\.]*(\*\*[\d\+\-\*\/\(\)\.]+)*$/;
 
 //main function that takes input
 function myfunction(event){
     value += event.target.value;
     document.getElementById("inp").value = value;
 }
-// function to check string for input validation using regex
-function check_str(){
-    console.log("in check_str");
-    if(value.match(reg)){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
+
 
 //function that evaluates the expression 
 function evaluatess(){
+    let check = String(eval(value)).includes(".");
     if(value != ""){
-        // if(check_str()){
-            ans = eval(value);
-            document.getElementById("inp").value = ans.toPrecision(13);
-            value = ans.toPrecision(13); 
-
-        // }
-        // else{
-        //     document.getElementById('inp').value = "Error";
-        // }
+        if(check){
+           value = eval(value);
+           document.getElementById("inp").value = value = Number(value).toFixed(3);
+        }
+        else{
+            value = eval(value);
+           document.getElementById("inp").value = value = value;
+        }
     }
 }
 //clear the input field
@@ -56,15 +38,13 @@ function delete_last(){
 }
 //square function
 function sqr(){
-    document.getElementById("inp").value = (parseFloat(value)*parseFloat(value)).toPrecision(13);
-    value = (parseFloat(value)*parseFloat(value)).toPrecision(13);
+    document.getElementById("inp").value = value = (parseFloat(value)*parseFloat(value)).toPrecision(3);
 }
 // function for degree function
 function DEG(event){
     val = document.getElementById("inp").value
        if(val != ""){
-           document.getElementById("inp").value = eval((parseInt(value*22)/1260).toPrecision(13));
-           value = eval((parseInt(value*22)/1260).toPrecision(13));
+           document.getElementById("inp").value = value = eval((parseInt(value*22)/1260).toPrecision(1));
        }
        else{
            document.getElementById("inp").value = "0.01746";
@@ -74,8 +54,7 @@ function DEG(event){
 
 // function for fixed exponent
 function F_E(){
-    document.getElementById("inp").value = parseFloat(value).toExponential(2);
-    value = parseFloat(value).toExponential(2);
+    document.getElementById("inp").value = value = parseFloat(value).toExponential(2);
 }
 
 
@@ -95,7 +74,7 @@ function pi_check(event){
 // check value of input and accordingly put value of e
 function e_check(event){
     val = document.getElementById("inp").value
-       if(val != 0  ){
+       if(val != 0){
            document.getElementById("e").value = "*2.71";
            myfunction(event);
        }
@@ -108,38 +87,32 @@ function e_check(event){
 
 //reciprocal function
 function reciprocal(){
-    document.getElementById("inp").value = eval(1/parseFloat(value)).toPrecision(13);
-    value = eval(1/parseFloat(value)).toPrecision(13);
+    document.getElementById("inp").value = value = eval(1/parseFloat(value)).toPrecision(3);
 }
 //to get absolute value
 function myabs(){
-    document.getElementById("inp").value = Math.abs(parseFloat(value)).toPrecision(13);
-    value = Math.abs(parseFloat(value)).toPrecision(13);
+    document.getElementById("inp").value = value = Math.abs(parseFloat(value)).toPrecision(3);
 }
 //find e^value
 function exponent(){
-    document.getElementById("inp").value = Math.exp(parseFloat(value)).toPrecision(13);
-    value = Math.exp(parseFloat(value)).toPrecision(13);
+    document.getElementById("inp").value = value = Math.exp(parseFloat(value)).toPrecision(3);
 }
 //find square root
 function squarert(){
-    document.getElementById("inp").value = Math.sqrt(parseFloat(value)).toPrecision(13);
-    value = Math.sqrt(parseFloat(value)).toPrecision(13);
+    document.getElementById("inp").value = value = Math.sqrt(parseFloat(value)).toPrecision(3);
 }
 // finds 10^value
 function ten_raise_to_x(){
-    document.getElementById("inp").value = Math.pow(10,parseFloat(value)).toPrecision(13);
-    value = Math.pow(10,value).toPrecision(13);
+    document.getElementById("inp").value = value = Math.pow(10,parseFloat(value)).toPrecision(3);
 }
 // finds logarthim
 function logarithm(){
-    document.getElementById("inp").value = Math.log(parseFloat(value)).toPrecision(13);
-    value = Math.log(parseFloat(value)).toPrecision(13);
+    document.getElementById("inp").value = value = Math.log(parseFloat(value)).toPrecision(3);
 }
 // finds natural log
 function natural_log(){
     e = 2.71828182846;
-    document.getElementById("inp").value = Math.log(e,parseFloat(value));
+    document.getElementById("inp").value= value = Math.log(e,parseFloat(value));
 }
 
 // function to save the value to value to memory
@@ -148,8 +121,7 @@ function store_mem(){
 }
 //recall memory value
 function recall_mem(){
-    document.getElementById("inp").value = mem;
-    value = mem;
+    document.getElementById("inp").value = value = mem;
 }
 //clear memory value
 function clear_mem(){
@@ -175,39 +147,32 @@ function factorialize(num) {
     else {
         return (num * factorialize(num - 1));
     }
-  }
+}
 // factorial calling function
 function fact(){
-    document.getElementById("inp").value = factorialize(parseInt(value));
-    value = factorialize(parseInt(value)).toPrecision(13);
+    document.getElementById("inp").value = value = factorialize(parseInt(value));
 }
 //sin function
 function sin(){
-    document.getElementById("inp").value = Math.sin((parseInt(value)*Math.PI)/180).toPrecision(13);
-    value = Math.sin((parseInt(value)*Math.PI)/180).toPrecision(13);
+    document.getElementById("inp").value = value = Math.sin((parseInt(value)*Math.PI)/180).toPrecision(3);
 }
 // cos function
 function cos(){
-    document.getElementById("inp").value = Math.cos((parseInt(value)*Math.PI)/180).toPrecision(13);
-    value = Math.cos((parseInt(value)*Math.PI)/180).toPrecision(13);
+    document.getElementById("inp").value = value = Math.cos((parseInt(value)*Math.PI)/180).toPrecision(3);
 }
 // tan function
 function tan(){
-    document.getElementById("inp").value = Math.tan((parseInt(value)*Math.PI)/180).toPrecision(13);
-    value = Math.tan((parseInt(value)*Math.PI)/180).toPrecision(13);
+    document.getElementById("inp").value = value = Math.tan((parseInt(value)*Math.PI)/180).toPrecision(3);
 }
 // sec function
 function sec(){
-    document.getElementById("inp").value = 1/(Math.cos((parseInt(value)*Math.PI)/180)).toPrecision(13);
-    value = 1/(Math.cos((parseInt(value)*Math.PI)/180)).toPrecision(13);
+    document.getElementById("inp").value = value = 1/(Math.cos((parseInt(value)*Math.PI)/180)).toPrecision(3);
 }
 // cosec function
 function cosec(){
-    document.getElementById("inp").value = 1/(Math.sin((parseInt(value)*Math.PI)/180)).toPrecision(13);
-    value = 1/(Math.sin((parseInt(value)*Math.PI)/180)).toPrecision(13);
+    document.getElementById("inp").value = value = 1/(Math.sin((parseInt(value)*Math.PI)/180)).toPrecision(3);
 }
 // cot function
 function cot(){
-    document.getElementById("inp").value = 1/(Math.tan((parseInt(value)*Math.PI)/180)).toPrecision(13);
-    value = 1/(Math.tan((parseInt(value)*Math.PI)/180)).toPrecision(13);
+    document.getElementById("inp").value = value = 1/(Math.tan((parseInt(value)*Math.PI)/180)).toPrecision(3);
 }
