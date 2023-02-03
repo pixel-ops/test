@@ -1,3 +1,0 @@
-# Practical of mongoDB
-
-
