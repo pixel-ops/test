@@ -1,0 +1,86 @@
+body {
+  height: 480px;
+  width: 565px;
+  background-color: rgb(255, 255, 255);
+  margin: 100px auto;
+}
+
+.main {
+  font-family: "Inconsolata", monospace;
+  background-color: rgba(196, 196, 196, 0.5);
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+.main .blur {
+  color: rgba(0, 0, 0, 0.1);
+}
+.main .numbers {
+  font-weight: bold;
+}
+.main .color {
+  background-color: white;
+}
+.main .inp .input-text {
+  text-align: right;
+}
+.main .inp input {
+  font-family: "Inconsolata", monospace;
+  border-radius: 5px 5px 0px 0px;
+  height: 100px;
+  font-size: 70px;
+  width: 560px;
+  border: none;
+}
+.main .first {
+  display: flex;
+}
+.main .first .DEG {
+  margin: 15px 2px;
+  background: none;
+}
+.main .first .DEG button {
+  border-radius: 5px;
+  border: none;
+  font-size: 1em;
+  height: 5px;
+  width: 90px;
+  background: rgba(255, 255, 255, 0);
+  font-size: 1.3em;
+}
+.main .first .F-E {
+  margin: 15px 0px;
+}
+.main .first .F-E button {
+  border-radius: 5px;
+  border: none;
+  font-size: 1em;
+  height: 5px;
+  width: 90px;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 1.3em;
+}
+.main .third {
+  display: flex;
+  align-items: center;
+}
+.main .third .Trignometry {
+  padding: 10px;
+}
+.main .third .Function {
+  padding-top: -5px;
+  padding: 10px;
+}
+.main .third .Function img {
+  padding-top: 10px;
+}
+.main .colour {
+  background-color: rgb(255, 255, 255);
+}
+.main table tr td button {
+  border: none;
+  font-size: 1em;
+  height: 50px;
+  width: 90px;
+  background-color: rgb(223, 223, 223);
+  font-size: 1.3em;
+}/*# sourceMappingURL=style.css.map */
