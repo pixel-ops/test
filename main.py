@@ -1,61 +1,71 @@
 from tabulate import tabulate
+import pandas as pd
 
 class ATM():
 
-    bank = []
+    bank = {"ICICI":["meet"],"HDFC":[]}
     user = {1:{"username":"meet","lastname":"Parekh","password":"123","branch":"Bopal","balance":100},}
-    initial_balance = 100
-
-    # def __init__(self) -> None:
-        
+    user_id = len(user)
+    my_bank = ""        
         
 
     def add_bank(self):
-
-        if not bool(self.bank):
+        bank_exists = input("Do you want to enter new bank(y/n): ")
+        if bank_exists == "y":
             print("you have to enter a bank")
-            self.bank.append(input("Enter your bank name: "))
-            print(self.bank)
-            self.login()
+            self.my_bank = input("Enter your bank name: ")
+            self.bank[self.my_bank] = [] 
+            print(self.bank,self.my_bank)
+            r =self.login()
+            return r
 
         else:
-            my_bank = input("Enter your bank: ")
-
-            if my_bank in self.bank:
-                self.login()
-
+            self.my_bank = input("Enter your bank: ")
+            if self.my_bank in self.bank.keys():
+                r = self.login()
+                return r
             else:
                 print("Enter correct details")
 
-
     def login(self):
-
         account_exists = input("Do you have an account?(y/n): ")
-
         if account_exists == "y": 
-
             username = input("Enter your username: ")
             password = input("Enter your password: ")
-
-            if self.user[1]["username"] == username and self.user[1]["password"] == password:
-
-                self.display()
-            
+            if username in self.bank.get(self.my_bank):
+                for i in self.user.keys():
+                    if self.user[i]["username"] == username and self.user[i]["password"] == password:
+                        self.user_id = i
+                        print("Logged in successfully!")
+                        return True
+                        
+                    else:
+                        print("User does not exist")
+                        new_register = input("Do you want to register yourself?(y/n): ")
+                        if new_register == "y":
+                            r = self.register()
+                            return r
+                        else:
+                            print("Thank you!")
+                            return False
             else:
-
                 print("User does not exist")
+                new_register = input("Do you want to register yourself?(y/n): ")
+                if new_register == "y":
+                    r = self.register()
+                    return r
+                else:
+                    print("Thank you!")
+                    return False
+                    
         else:
-
             new_register = input("Do you want to register (y/n): ")
-
             if new_register == 'y':
-
-                self.register()
-
+                r = self.register()
+                return r
             else:
-
                 print("thank you for using our facility")
-
+                return False
             
     def register(self):
         my_user = {}
@@ -64,16 +74,45 @@ class ATM():
         my_user["password"] = input("Enter your password: ")
         my_user["Branch"] = input("Enter your Branch: ")
         my_user["balance"] = 100
-        self.user[1] = my_user
-        print(self.user)
+        self.user[len(self.user)+1] = my_user
+        self.user_id +=1
+        print("Successfully registred!")
+        return True
 
-
-    def display(self):
+    def display(self,disp="all"):
         print("Your infornamtion: ")
-        # print(tabulate(self.user[1].values(),headers=self.user[1].keys()))
-        print(self.user[1])
+        if disp == "all":
+            for i,j in self.user[self.user_id].items():
+                print(i," : ",j)
+        else:
+            print(disp," : ",self.user[self.user_id].get(disp))
+        
+
+    def add_balance(self):
+        new_balance = input("Enter the amount you want to add(in Rs.): ")
+        self.user[self.user_id]["balance"]+=int(new_balance)
+        if input("Do you want to add balance again?(y/n): ") == "y":
+            self.add_balance()
+        else:
+            print("Balance Updates!")
+            self.display("balance")
 
 
 a = ATM()
-a.add_bank()
-    
+print("-----Welcome to banking management system-----")
+if a.add_bank():
+    while True:
+        print("What else you want to do?")
+        choice = input(" 1. Display your data\n 2. add balance\n 3. display balance\n 4. exit\n Enter your input here: ")
+        if choice == "1":
+            a.display()
+        elif choice == "2":
+            a.add_balance()
+        elif choice == "3":
+            a.display("balance")
+        elif choice == "4":
+            break
+        else:
+            print("Enter a valid input")
+else:
+    print("Something went wrong")
