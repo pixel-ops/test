@@ -4,7 +4,7 @@ from getpass import getpass
 
 @dataclass()
 class userdata:
-    bank: dict
+    user_bank: str
     userid: int
     username: str
     lastname: str
@@ -16,24 +16,50 @@ class userdata:
 class all_data:
     data: list[userdata]
 
+@dataclass
+class bank_data:
+    bank:dict
 
 my_data = all_data([])
+all_bank = bank_data({})
+
+
 # CLASS BANK CONTAINING ALL THE METHODS FOR THE USER
 class Bank:
 
     user_login = False
-    user_bank = ""
     print(type(my_data.data))
     userid = len(my_data.data)
 
-    #ADD NEW BANK TO THE DATA
-    # def add_new_bank(self):
-    #     self.my_bank = input("Enter bank name: ")
-    #     my_data.bank[self.my_bank] = [] 
-    #     print(my_data.bank,self.my_bank)
-    #     self.login()
+    # ADD NEW BANK TO THE DATA
+    def add_new_bank(self):
+        self.my_bank = input("Enter bank name: ")
+        all_bank.bank[self.my_bank] = [] 
+        print(all_bank.bank,self.my_bank)
+        return self.my_bank
 
 
+    #ADD NEW USER TO THE BANK
+    def add_user_to_bank(self,username):
+        if self.my_bank in  all_bank.bank.keys():
+            all_bank.bank.get(self.my_bank).append(username)
+        else:
+            print("Bank not available")
+            if input("Do you wan to add new bank?(y/n): ") == "y":
+                self.add_new_bank()
+            else:
+                print("some error occured!!")
+                exit()
+        print(all_bank.bank)
+        print(all_bank.bank.values())
+
+
+    #   CHECK THAT THE USER IS IN THE BANK DATABASE OR NOT
+    def check_user_in_bank(self,username,bank):
+        if username in all_bank.bank.get(bank):
+            return True
+        else:
+            return False
 
     #CHECK LOGIN CREDENTIALS ON A CERTIAN BANK
     def login(self):
@@ -43,19 +69,25 @@ class Bank:
         temp_user = {}
         for i in range(0,len(my_data.data)):
             temp_user[i] = my_data.data[i].username
+        print(temp_user)
         self.userid =  int(''.join([str(i) for i in temp_user if temp_user[i]==username]))
-        # self.userid = int(''.join(self.userid))
-
-        if username == my_data.data[self.userid].username and hash(password) == my_data.data[self.userid].password:
-           print("Logged in successfully as ",username)
-           self.user_login = True
-        else:
-            print("User does not exist")
-            new_register = input("Do you want to register yourself?(y/n): ")
-            if new_register == "y":
-                self.register()
+        if self.check_user_in_bank(username, my_data.data[self.userid].user_bank):
+            if username == my_data.data[self.userid].username and hash(password) == my_data.data[self.userid].password:
+                print("Logged in successfully as ",username)
+                self.user_login = True
             else:
-                print("Thank you!")
+                print("User does not exist")
+                new_register = input("Do you want to register yourself?(y/n): ")
+                if new_register == "y":
+                    self.register()
+                else:
+                    print("Thank you!")
+        else:
+            print("User does not exists in bank!")
+            if input("Do you want to be a new user to our bank?(y/n):") == "y":
+                self.add_user_to_bank(username)
+            else:
+                print("thank you!")
 
 
 
@@ -66,21 +98,29 @@ class Bank:
         lastname = input("Enter your lastname: ")
         password = getpass("Enter your password: ")
         branch   = input("Enter your Branch: ")
+        bank = self.add_new_bank()
+        self.add_user_to_bank(username)
         if not my_data.data:
             self.userid = 0
         else: 
             self.userid = len(my_data.data) 
-        my_data.data.append(userdata(self.user_bank,self.userid,username,lastname,hash(password),branch))
+        my_data.data.append(userdata(bank,self.userid,username,lastname,hash(password),branch))
         print(my_data.data)
         self.user_login = True
         print("Successfully registred!")
+
+
     #GET THE DATA FROM USER THAT HE WANTS TO UPDATE
     def get_user_updated_info(self):
         print("-----Update Info-----")
         username = input("Enter your new username: ")
         lastname = input("Enter your new lastname: ")    
         password = input("Enter your new password: ")
-        self.update_user_info(username,lastname,password)
+        if self.check_user_in_bank(my_data.data[self.userid].username,self.my_bank):
+            all_bank.bank.get(self.my_bank).remove(my_data.data[self.userid].username)
+        else:
+            print("asjdhygakfu")
+        self.update_user_info(username,lastname,hash(password))
 
 
     #UPDATES USER'S INFORMATION
@@ -88,7 +128,7 @@ class Bank:
         my_data.data[self.userid].username = username
         my_data.data[self.userid].lastname = lastname
         my_data.data[self.userid].password = password
-        
+        self.add_user_to_bank(username)
     
     #DISPALYS THE DATA OF THE USER OR ANY DATA HE LIKES
     def display_all_data(self,disp="all"):
@@ -146,7 +186,6 @@ class ATM(Bank):
 
 meet = ATM()
 
-
 while True:
     if meet.user_login:
         meet.all_options()
@@ -166,6 +205,3 @@ while True:
                 exit()
         else:
             print("Enter valid inupt")
-
-# meet.display_all_data()
-# meet.add_balance()
