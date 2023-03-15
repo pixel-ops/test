@@ -19,18 +19,20 @@ class Bank_data:
     data: list[Userdata]
 
 
-# current_data = [Bank_data('a',0,[]),Bank_data('b',1,[])]
+# current_data = [Bank_data('a',0,[Userdata('a',1,'b','b','b','b')]),Bank_data('b',1,[])]
 
 current_data = []
 
 class Bank:
     
+    
     user_login = False
     current_bank_id = 0
-    # current_user_id = 0
+
 
     #GETS THE ID OF THE CURRENT BANK
     def get_bank_id(self,name):
+        lgt = len(current_data)
         for i in range(lgt):
             if name in current_data[i].bank:
                 print(current_data[i])
@@ -42,6 +44,7 @@ class Bank:
         bank_name = input("Enter the name of the bank: ")
         current_data.append(Bank_data(bank_name,len(current_data),[]))
 
+
     #   CHECK THAT THE USER IS IN THE BANK DATABASE OR NOT
     def check_user_in_bank(self,username):
         for d in current_data[self.current_bank_id].data:
@@ -50,6 +53,7 @@ class Bank:
                 return True
             else:
                 return False
+
 
     #CHECK LOGIN CREDENTIALS ON A CERTIAN BANK
     def login(self):
@@ -69,6 +73,7 @@ class Bank:
                     self.register()
                 else:
                     print("Thank you!")
+
 
     #REGISTER IF NOT ALREADY REGISTRED ON A SPECIFIC BANK
     def register(self):
@@ -96,12 +101,14 @@ class Bank:
         password = input("Enter your new password: ")
         self.update_user_info(username,lastname,hash(password))
 
+
     #UPDATES USER'S INFORMATION
     def update_user_info(self,username,lastname,password):
 
         current_data[self.current_bank_id].data[self.current_user_id].username = username
         current_data[self.current_bank_id].data[self.current_user_id].lastname = lastname
         current_data[self.current_bank_id].data[self.current_user_id].password = password
+
 
     #DISPALYS THE DATA OF THE USER OR ANY DATA HE LIKES
     def display_all_data(self,disp="all"):
@@ -116,6 +123,31 @@ class Bank:
         else:
             print(disp," : ",current_data[self.current_bank_id].data[self.current_user_id].__getattribute__(disp))
 
+    # FUNCTION PRINTS THE DATA OF ALL THE USERS IN THE CURRENT BANK IN A DICTIONARY
+    def get_all_user_bank_data(self):
+        choice = input("Input the name of the bank: ")
+        for i in current_data:
+            if choice == i.bank:
+                for j in i.data:
+                    print(j.__dict__)
+            else:
+                print("Given name does not exists")
+
+    # INERFACE WHICH IS SHOWN IN THE START OF THE PROGRAM
+    def employee_access_interface(self):
+        while True:
+            print("-----Welcome to ATM------")
+            choice = input("Select from options below \n1. Add bank \n2. Display bank data \n3. Continue to login \n4. Exit \nEnter your option here: ")
+            if choice == '1':
+                self.add_new_bank()
+            elif choice == '2':
+                self.get_all_user_bank_data()
+            elif choice == '3':
+                break
+            elif choice == '4':
+                exit()
+            else:
+                print("Enter valid input")
 
 
 class ATM(Bank):
@@ -155,15 +187,12 @@ class ATM(Bank):
 
 
 meet = ATM()
-print("-----Welcome to ATM------")
-lgt = len(current_data)+1
-print(lgt)
-meet.add_new_bank()
-meet.add_new_bank()
-print(current_data)
+meet.employee_access_interface()
+# print(current_data)
 my_bank = input("Enter the bank you want to login into: ")
 meet.get_bank_id(my_bank)
-print(meet.current_bank_id)
+# print(meet.current_bank_id)
+
 
 
  
@@ -186,6 +215,8 @@ while True:
                     meet.login()
             elif user_choice == "3":
                     print("Thank you for using this ATM")
-                    exit()
+                    meet.employee_access_interface()
+                    my_bank = input("Enter the bank you want to login into: ")
+                    meet.get_bank_id(my_bank)
             else:
                 print("Enter valid inupt")
