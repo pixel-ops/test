@@ -48,11 +48,11 @@ class Bank:
     #   CHECK THAT THE USER IS IN THE BANK DATABASE OR NOT
     def check_user_in_bank(self,username):
         for d in current_data[self.current_bank_id].data:
-            self.current_user_id = d.userid
             if username in d.username:
+                self.current_user_id = d.userid
                 return True
             else:
-                return False
+                continue
 
 
     #CHECK LOGIN CREDENTIALS ON A CERTIAN BANK
@@ -87,7 +87,6 @@ class Bank:
         else:
             self.current_user_id = 0
         current_data[meet.current_bank_id].data.append(Userdata(current_data[meet.current_bank_id].bank,self.current_user_id,username,lastname,hash(password),branch))
-        print(current_data)
         self.user_login = True
         print("Successfully registred!")
         self.login()
