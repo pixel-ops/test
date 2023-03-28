@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
 from getpass import getpass
 import time
+import json
+import pandas as pd
 
 
 @dataclass
@@ -138,12 +140,17 @@ class Bank:
     def get_all_user_bank_data(self):
         choice = input("Input the name of the bank: ")
         for i in current_data:
-            if choice == i.bank:
-                for j in i.data:
-                    print(j.__dict__)
+            if i.data:
+                if choice == i.bank:
+                    for j in i.data:
+                        print("----Account of user" + j.username + "of bank: " + j.user_bank + "----")
+                        pd_object = pd.read_json(json.dumps(j.__dict__, indent=3), typ='series') #CREATING A PANDAS OBJECT TO PRINT IN TABLE FORMAT
+                        print(pd.DataFrame(pd_object)) #CONVERTING PANDAS OBJECT TO DATA PRAME TO PRINT 
+                else:
+                    print("Given name does not exists")
             else:
-                print("Given name does not exists")
-
+                print("No data avaliable for the current bank")
+    
     # INERFACE WHICH IS SHOWN IN THE START OF THE PROGRAM
     def employee_access_interface(self):
         while True:
@@ -220,20 +227,21 @@ class Bank:
     def logout(self):
         self.user_login = False
 
-    #GET INDIVIDUAL ID OF THE PERSON
+    # GET INDIVIDUAL ID OF THE PERSON
     def get_individual_user_id(self, name, reciever_bank_id):
         for d in current_data[reciever_bank_id].data:
             if name in d.username:
                 userid = d.userid
                 return int(userid)
 
-    #GET INDIVIDUAL BANK ID OF THE PERSON
+    # GET INDIVIDUAL BANK ID OF THE PERSON
     def get_individual_bank_id(self, name):
         lgt = len(current_data)
         for i in range(lgt):
             if name in current_data[i].bank:
                 return int(i)
     # FUNCTION TO MAKE A TRANSACTION
+
     def make_transaction(self):
         reciever_bank = input("Enter the bank of the user: ")
         reciever_bank_id = int(self.get_individual_bank_id(reciever_bank))
@@ -257,6 +265,7 @@ class Bank:
             print("Enter valid input")
             self.make_transaction()
     # DISPLAY ALL THE REANSACTIONS
+
     def display_all_transaction(self):
         print("-----Transaction history-----")
         for i in current_data[self.current_bank_id].data[self.current_user_id].transaction:
@@ -295,13 +304,13 @@ class ATM(Bank):
 meet = ATM()
 
 while True:
-    if not current_data:
+    if not current_data: # IF THE LIST IS EMPTY THEN IT WILL REDIRECT USER EMPOYEE INTERFACE OF ADD ATLEAST ONE BANK
         meet.employee_access_interface()
         my_bank = input("Enter the bank you want to login into: ")
         if meet.get_bank_id(my_bank):
             pass
         else:
-            print("Bank does not exists 281")
+            print("Bank does not exists")
             meet.employee_access_interface()
             my_bank = input("Enter the bank you want to login into: ")
             meet.get_bank_id(my_bank)
