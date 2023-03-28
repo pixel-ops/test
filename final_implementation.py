@@ -37,7 +37,6 @@ current_data = []
 
 
 class Bank:
-
     user_login = False
     current_bank_id = 0
 
@@ -74,13 +73,21 @@ class Bank:
         username = input("Enter your username: ")
         password = getpass("Enter your password: ")
         if self.check_user_in_bank(username):
-            if username == current_data[self.current_bank_id].data[self.current_user_id].username and hash(password) == current_data[self.current_bank_id].data[self.current_user_id].password:
+            if (
+                username
+                == current_data[self.current_bank_id]
+                .data[self.current_user_id]
+                .username
+                and hash(password)
+                == current_data[self.current_bank_id]
+                .data[self.current_user_id]
+                .password
+            ):
                 print("Logged in successfully as ", username)
                 self.user_login = True
             else:
                 print("User does not exist")
-                new_register = input(
-                    "Do you want to register yourself?(y/n): ")
+                new_register = input("Do you want to register yourself?(y/n): ")
                 if new_register == "y":
                     self.register()
                 else:
@@ -101,8 +108,17 @@ class Bank:
             self.current_user_id = len(current_data[self.current_bank_id].data)
         else:
             self.current_user_id = 0
-        current_data[self.current_bank_id].data.append(Userdata(
-            current_data[self.current_bank_id].bank, self.current_user_id, username, lastname, hash(password), branch, []))
+        current_data[self.current_bank_id].data.append(
+            Userdata(
+                current_data[self.current_bank_id].bank,
+                self.current_user_id,
+                username,
+                lastname,
+                hash(password),
+                branch,
+                [],
+            )
+        )
         self.user_login = True
         print("Successfully registred!")
         self.login()
@@ -118,23 +134,35 @@ class Bank:
 
     # UPDATES USER'S INFORMATION
     def update_user_info(self, username, lastname, password):
-
-        current_data[self.current_bank_id].data[self.current_user_id].username = username
-        current_data[self.current_bank_id].data[self.current_user_id].lastname = lastname
-        current_data[self.current_bank_id].data[self.current_user_id].password = password
+        current_data[self.current_bank_id].data[
+            self.current_user_id
+        ].username = username
+        current_data[self.current_bank_id].data[
+            self.current_user_id
+        ].lastname = lastname
+        current_data[self.current_bank_id].data[
+            self.current_user_id
+        ].password = password
 
     # DISPALYS THE DATA OF THE USER OR ANY DATA HE LIKES
     def display_all_data(self, disp="all"):
         print("Your infornamtion: ", disp)
         if disp == "all":
-            data = current_data[self.current_bank_id].data[self.current_user_id].__dict__
+            data = (
+                current_data[self.current_bank_id].data[self.current_user_id].__dict__
+            )
             print("-----your data-----")
             for i, j in data.items():
                 print(i, " : ", j)
             print("-----End-----")
         else:
             print(
-                disp, " : ", current_data[self.current_bank_id].data[self.current_user_id].__getattribute__(disp))
+                disp,
+                " : ",
+                current_data[self.current_bank_id]
+                .data[self.current_user_id]
+                .__getattribute__(disp),
+            )
 
     # FUNCTION PRINTS THE DATA OF ALL THE USERS IN THE CURRENT BANK IN A DICTIONARY
     def get_all_user_bank_data(self):
@@ -143,32 +171,44 @@ class Bank:
             if i.data:
                 if choice == i.bank:
                     for j in i.data:
-                        print("----Account of user" + j.username + "of bank: " + j.user_bank + "----")
-                        pd_object = pd.read_json(json.dumps(j.__dict__, indent=3), typ='series') #CREATING A PANDAS OBJECT TO PRINT IN TABLE FORMAT
-                        print(pd.DataFrame(pd_object)) #CONVERTING PANDAS OBJECT TO DATA PRAME TO PRINT 
+                        print(
+                            "----Account of user"
+                            + j.username
+                            + "of bank: "
+                            + j.user_bank
+                            + "----"
+                        )
+                        pd_object = pd.read_json(
+                            json.dumps(j.__dict__, indent=3), typ="series"
+                        )  # CREATING A PANDAS OBJECT TO PRINT IN TABLE FORMAT
+                        print(
+                            pd.DataFrame(pd_object)
+                        )  # CONVERTING PANDAS OBJECT TO DATA PRAME TO PRINT
                 else:
                     print("Given name does not exists")
             else:
                 print("No data avaliable for the current bank")
-    
+
     # INERFACE WHICH IS SHOWN IN THE START OF THE PROGRAM
     def employee_access_interface(self):
         while True:
             print("-----Welcome to ATM------")
             choice = input(
-                "Select from options below \n1. Add bank \n2. Display bank data \n3. Continue to login \n4. Remove bank \n5. Exit \nEnter your option here: ")
-            if choice == '1':
+                "Select from options below \n1. Add bank \n2. Display bank data \n3. Continue to login \n4. Remove bank \n5. Exit \nEnter your option here: "
+            )
+            if choice == "1":
                 self.add_new_bank()
-            elif choice == '2':
+            elif choice == "2":
                 self.get_all_user_bank_data()
-            elif choice == '3':
+            elif choice == "3":
                 break
-            elif choice == '4':
+            elif choice == "4":
                 self.remove_bank()
-            elif choice == '5':
+            elif choice == "5":
                 exit()
             else:
                 print("Enter valid input")
+
     # REMOVE USER FROM THE BANK
 
     def remove_user(self):
@@ -179,6 +219,7 @@ class Bank:
             self.user_login = False
         else:
             print("user does not exists")
+
     # REMOVE BANK FROM THE DATA
 
     def remove_bank(self):
@@ -187,20 +228,26 @@ class Bank:
             del current_data[self.current_bank_id]
         else:
             print("bank does not exists178")
+
     # CHANGE PASSWORD OF THE USER
 
     def change_password(self):
         password = input("Enter your new password: ")
         current_data[self.current_bank_id].data[self.current_user_id].password = hash(
-            password)
+            password
+        )
         self.display_all_data()
 
     # WITHDRAW MONEY FROM THE BANK
     def withdraw_money(self):
         new_balance = input("Enter the amount you want to withdraw(in Rs.): ")
-        if int(new_balance) <= current_data[self.current_bank_id].data[self.current_user_id].balance:
-            current_data[self.current_bank_id].data[self.current_user_id].balance -= int(
-                new_balance)
+        if (
+            int(new_balance)
+            <= current_data[self.current_bank_id].data[self.current_user_id].balance
+        ):
+            current_data[self.current_bank_id].data[
+                self.current_user_id
+            ].balance -= int(new_balance)
             if input("Do you want to withdraw money again?(y/n): ") == "y":
                 self.withdraw_money()
             else:
@@ -216,7 +263,8 @@ class Bank:
     def deposit_money(self):
         new_balance = input("Enter the amount you want to add(in Rs.): ")
         current_data[self.current_bank_id].data[self.current_user_id].balance += int(
-            new_balance)
+            new_balance
+        )
         if input("Do you want to add balance again?(y/n): ") == "y":
             self.deposit_money()
         else:
@@ -240,46 +288,71 @@ class Bank:
         for i in range(lgt):
             if name in current_data[i].bank:
                 return int(i)
+
     # FUNCTION TO MAKE A TRANSACTION
 
     def make_transaction(self):
         reciever_bank = input("Enter the bank of the user: ")
         reciever_bank_id = int(self.get_individual_bank_id(reciever_bank))
         reciever = input("Enter the name of the reciever: ")
-        reciever_user_id = int(
-            self.get_individual_user_id(reciever, reciever_bank_id))
-        transffered_amout = int(
-            input("Enter the amount you want to transfer: "))
+        reciever_user_id = int(self.get_individual_user_id(reciever, reciever_bank_id))
+        transffered_amout = int(input("Enter the amount you want to transfer: "))
 
-        if int(transffered_amout) <= current_data[self.current_bank_id].data[self.current_user_id].balance:
-            current_data[self.current_bank_id].data[self.current_user_id].balance -= int(
-                transffered_amout)
+        if (
+            int(transffered_amout)
+            <= current_data[self.current_bank_id].data[self.current_user_id].balance
+        ):
+            current_data[self.current_bank_id].data[
+                self.current_user_id
+            ].balance -= int(transffered_amout)
             current_data[reciever_bank_id].data[reciever_user_id].balance += int(
-                transffered_amout)
+                transffered_amout
+            )
             self.display_all_data("balance")
             # print("Balance of reciever: "+str(current_data[reciever_bank_id].data[reciever_user_id].balance))
 
-            current_data[self.current_bank_id].data[self.current_user_id].transaction.append(Transaction_history(
-                self.current_user_id, self.current_bank_id, reciever_user_id, reciever_bank_id, transffered_amout))
+            current_data[self.current_bank_id].data[
+                self.current_user_id
+            ].transaction.append(
+                Transaction_history(
+                    self.current_user_id,
+                    self.current_bank_id,
+                    reciever_user_id,
+                    reciever_bank_id,
+                    transffered_amout,
+                )
+            )
         else:
             print("Enter valid input")
             self.make_transaction()
+
     # DISPLAY ALL THE REANSACTIONS
 
     def display_all_transaction(self):
         print("-----Transaction history-----")
-        for i in current_data[self.current_bank_id].data[self.current_user_id].transaction:
-            print(str(current_data[i.sender_bank].data[i.sender_id].username), "user of bank", str(current_data[i.sender_bank].data[i.sender_id].user_bank) + " sent Rs." + str(
-                i.amount) + " to " + str(current_data[i.reciever_bank].data[i.reciever_id].username) + " user of bank " + str(current_data[i.reciever_bank].data[i.reciever_id].user_bank))
+        for i in (
+            current_data[self.current_bank_id].data[self.current_user_id].transaction
+        ):
+            print(
+                str(current_data[i.sender_bank].data[i.sender_id].username),
+                "user of bank",
+                str(current_data[i.sender_bank].data[i.sender_id].user_bank)
+                + " sent Rs."
+                + str(i.amount)
+                + " to "
+                + str(current_data[i.reciever_bank].data[i.reciever_id].username)
+                + " user of bank "
+                + str(current_data[i.reciever_bank].data[i.reciever_id].user_bank),
+            )
 
 
 class ATM(Bank):
-
     # GIVES THE USER ALL THE OPTIONS TO USE IN THE ATM
     def all_options(self):
         print("-----Dashboard-----")
         choice = input(
-            "Select from options below \n1. dispay data \n2. Add Balance \n3. Update Information \n4. Change Password \n5. Withdraw money \n6. Send money to other user \n7. Display all transaction \n8. Logout \nEnter your option here: ")
+            "Select from options below \n1. dispay data \n2. Add Balance \n3. Update Information \n4. Change Password \n5. Withdraw money \n6. Send money to other user \n7. Display all transaction \n8. Logout \nEnter your option here: "
+        )
         match choice:
             case "1":
                 self.display_all_data()
@@ -304,7 +377,9 @@ class ATM(Bank):
 meet = ATM()
 
 while True:
-    if not current_data: # IF THE LIST IS EMPTY THEN IT WILL REDIRECT USER EMPOYEE INTERFACE OF ADD ATLEAST ONE BANK
+    if (
+        not current_data
+    ):  # IF THE LIST IS EMPTY THEN IT WILL REDIRECT USER EMPOYEE INTERFACE OF ADD ATLEAST ONE BANK
         meet.employee_access_interface()
         my_bank = input("Enter the bank you want to login into: ")
         if meet.get_bank_id(my_bank):
@@ -322,7 +397,8 @@ while True:
             print("-----Menu-----")
 
             user_choice = input(
-                "1. Register \n2. Login \n3. Remove user \n4. Exit \nEnter your input: ")
+                "1. Register \n2. Login \n3. Remove user \n4. Exit \nEnter your input: "
+            )
             if user_choice == "1":
                 meet.register()
             elif user_choice == "2":
