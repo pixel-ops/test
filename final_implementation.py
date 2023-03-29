@@ -47,8 +47,6 @@ class Bank:
             if name in current_data[i].bank:
                 self.current_bank_id = i
                 return True
-            else:
-                continue
         return False
 
     # ADD NEW BANK TO THE DATA
@@ -172,18 +170,13 @@ class Bank:
                 if choice == i.bank:
                     for j in i.data:
                         print(
-                            "----Account of user"
+                            "----Account of user "
                             + j.username
-                            + "of bank: "
+                            + " of bank: "
                             + j.user_bank
                             + "----"
                         )
-                        pd_object = pd.read_json(
-                            json.dumps(j.__dict__, indent=3), typ="series"
-                        )  # CREATING A PANDAS OBJECT TO PRINT IN TABLE FORMAT
-                        print(
-                            pd.DataFrame(pd_object)
-                        )  # CONVERTING PANDAS OBJECT TO DATA PRAME TO PRINT
+                        print(j.__dict__)
                 else:
                     print("Given name does not exists")
             else:
@@ -225,9 +218,12 @@ class Bank:
     def remove_bank(self):
         bank = input("Enter the bank you want to remove: ")
         if self.get_bank_id(bank):
+            print(current_data[self.current_bank_id])
             del current_data[self.current_bank_id]
+
+            print("bank deleted!")
         else:
-            print("bank does not exists178")
+            print("bank does not exists")
 
     # CHANGE PASSWORD OF THE USER
 
@@ -386,10 +382,17 @@ while True:
             pass
         else:
             print("Bank does not exists")
-            meet.employee_access_interface()
-            my_bank = input("Enter the bank you want to login into: ")
-            meet.get_bank_id(my_bank)
-
+            while True:
+                if input("Do you want to input bank again?(y/n):") == "y":
+                    print("Bank does not exists")
+                    meet.employee_access_interface()
+                    my_bank = input("Enter the bank you want to login into: ")
+                    a = meet.get_bank_id(my_bank)
+                    if a:
+                        break
+                else:
+                    print("Thank you for using our ATM!")
+                    exit()
     else:
         if meet.user_login:
             meet.all_options()
