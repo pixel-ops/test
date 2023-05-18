@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Quiz,Question,Option,Answer
+from .models import Quiz,Question,Option,Answer,CurrentAnswer
 from django.urls import reverse
 
 class QuizSerializer(serializers.ModelSerializer):
@@ -51,22 +51,36 @@ class AnswerSerializer(serializers.ModelSerializer):
             'answer',
         )
 
+class CurrentAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CurrentAnswer
+        fields =(
+            'id',
+            'question',
+            'answer',
+        )
+
+
 class AllQuestionSerializer(serializers.ModelSerializer):
     options = OptionSerializer(many=True,read_only=True)
     answer = AnswerSerializer(many=True,read_only=True)
+    current_answer = CurrentAnswerSerializer(many=True,read_only=True)
     class Meta:
         model = Question
         fields =(
+            'id',
             'name',
             'question',
             'total_options',
             'question_type',
             'options',
             'answer',
+            'current_answer',
         )
 
     def to_representation(self, instance): 
         representation = super().to_representation(instance)
         representation['name'] = instance.name.name
         return representation
-    
+
+

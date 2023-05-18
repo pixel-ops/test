@@ -78,3 +78,11 @@ class Answer(models.Model):
 
     def __str__(self) -> str:
         return str(self.question.question) or ' '
+    
+
+class CurrentAnswer(models.Model):
+    question = models.ForeignKey("api.Question",on_delete=models.CASCADE,related_name="current_answer")
+    answer = models.CharField(max_length=122)
+
+    def __str__(self) -> str:
+        return ' current answer:- ' + self.answer
