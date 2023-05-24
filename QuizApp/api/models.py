@@ -1,17 +1,19 @@
 from django.db import models
-from django.db.models.signals import post_save,pre_save,pre_init
-from django.dispatch import receiver
+# from django.db.models.signals import post_save,pre_save,pre_init
+# from django.dispatch import receiver
 
 # Create your models here.
 
 class Quiz(models.Model):
-    
+
     name = models.CharField(max_length=122)
     total_question = models.IntegerField(default=10)
     time = models.IntegerField(default=30)
     subject = models.CharField(max_length=122)
     difficulty = models.CharField(max_length=122)
-    
+    isCompleted = models.BooleanField(default=False)
+    total_marks = models.IntegerField(default=0)
+
     def __str__(self) -> str:
         return str(self.name) or ' '
 
@@ -37,7 +39,6 @@ class Question(models.Model):
     question = models.TextField()
     total_options = models.IntegerField(default=4)
     question_type = models.CharField(max_length=122,choices=type, default="single")
-    # correct_answer = models.CharField(max_length=122,null=True,blank=True)
     total_answer = models.IntegerField(default=1)
 
     def __str__(self) -> str:

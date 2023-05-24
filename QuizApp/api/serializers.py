@@ -3,7 +3,7 @@ from .models import Quiz,Question,Option,Answer,CurrentAnswer
 from django.urls import reverse
 
 class QuizSerializer(serializers.ModelSerializer):
-    total_marks = serializers.SerializerMethodField()
+    marks = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
 
     
@@ -17,10 +17,12 @@ class QuizSerializer(serializers.ModelSerializer):
             'time',
             'subject',
             'difficulty',
+            'isCompleted',
+            'marks',
             'total_marks',
         )
     
-    def get_total_marks(self,object):
+    def get_marks(self,object):
         marks = object.total_question*2
         return marks
     
@@ -78,9 +80,11 @@ class AllQuestionSerializer(serializers.ModelSerializer):
             'current_answer',
         )
 
-    def to_representation(self, instance): 
+    def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['name'] = instance.name.name
+        representation['isCompleted'] = instance.name.isCompleted
+        representation['total_marks'] = instance.name.total_marks
         return representation
 
 

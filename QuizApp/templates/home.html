@@ -6,49 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+      integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script>
       var settings = {
-    url: "http://127.0.0.1:8000/api/quiz",
-    method: "GET",
-    timeout: 0,
-    headers: {
-      'Authorization': `Bearer ${window.localStorage.getItem('accessToken')}`
-    }
-  };
+        url: "http://127.0.0.1:8000/api/quiz",
+        method: "GET",
+        timeout: 0,
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("accessToken")}`,
+        },
+      };
 
-  if (window.localStorage.getItem('accessToken') != null){
-  $.ajax(settings).done(function (data) {
-    for(var i=0;i<data.length;i++)
-    {
-        var id = data[i].id
-        $(".my").append("<a href='{% url 'quiz' pk=1 %}'>Link</a>".replace(/1/, id.toString()))
-        var item = $(`
+      if (window.localStorage.getItem("accessToken") != null) {
+        $.ajax(settings).done(function (data) {
+          for (var i = 0; i < data.length; i++) {
+            var id = data[i].id;
+            $(".my").append(
+              "<a href='{% url 'quiz' pk=1 %}'>Link</a>".replace(
+                /1/,
+                id.toString()
+              )
+            );
+            var item = $(`
             <h1> Quiz Name- ${data[i].name}</h1>
             <h2>Total Questions- ${data[i].total_question}</h2>
             <h2>Total time- ${data[i].time}</h2>
             <h2>Subject- ${data[i].subject}</h2>
             <h2>Difficulty- ${data[i].difficulty}</h2>
-            <h2>Total Marks- ${data[i].total_marks}</h2>
+            <h2>Total Marks- ${data[i].marks}</h2>
             
             <hr>
-        `)
-        $(".my").append(item)
-        
-    }
-    $("#Logout").click(function (event) {
-    // console.log("here")
-    event.preventDefault();
-    window.localStorage.removeItem('refreshToken');
-    window.localStorage.removeItem('accessToken');
-    window.location.href = "/login";
-});
-  });
-  }
-  else {
-    window.location("http://127.0.0.1:8000/login")
-  }
-
+        `);
+            $(".my").append(item);
+          }
+          $("#Logout").click(function (event) {
+            event.preventDefault();
+            window.localStorage.removeItem("refreshToken");
+            window.localStorage.removeItem("accessToken");
+            window.location.href = "/login";
+          });
+        });
+      } else {
+        window.location = "http://127.0.0.1:8000/login";
+      }
     </script>
   </head>
   <body>
